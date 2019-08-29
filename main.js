@@ -1,26 +1,35 @@
 var titleInput = document.querySelector(".projectTitle-input");
-var bodyInput = document.querySelector(".projectDescription-input");
+var descriptionInput = document.querySelector(".projectDescription-input");
 var saveButton = document.querySelector(".projectSubmit-button");
 var projectContainer = document.querySelector(".projects");
+var deleteButton = document.querySelector(".card-delete");
 
 var qualityList = ['Swill', 'Plausible', 'Genius'];
 var projectCollection;
 
 window.addEventListener('load', getStoredProjects);
 saveButton.addEventListener('click', createProject);
+titleInput.addEventListener('keyup', enableSaveButton);
+descriptionInput.addEventListener('keyup', enableSaveButton);
+projectContainer.addEventListener('click', cardActions);
 
 function getStoredProjects() {
+  saveButton.disabled = true;
   projectCollection = JSON.parse(localStorage.getItem("projects")) || [];
   reinstantiateStoredProject();
 }
 
 function createProject(e) {
   e.preventDefault()
-  var project = new Project(Date.now(), titleInput.value, bodyInput.value, false, qualityList[0]);
+  var project = new Project(Date.now(), titleInput.value, descriptionInput.value, false, qualityList[0]);
   projectCollection.push(project);
   project.saveToStorage(projectCollection);
   displayProjects(project);
-  bodyInput.value = "";
+  clearForm();
+}
+
+function clearForm() {
+  descriptionInput.value = "";
   titleInput.value = "";
   saveButton.disabled = true;
 }
@@ -30,11 +39,12 @@ function displayProjects(project) {
     <div class="card" data-id="${project.id}">
         <section class="card-top"></section>
         <section class="card-middle">
-          <h3 class="cards__middle--title" id="editable-title" contenteditable="true">${project.title}</h3>
-          <p class="cards__middle--text" id="editable-body" contenteditable="true">${project.body}</p>
+          <h3 class="card-title" contenteditable="true">${project.title}</h3>
+          <p class="card-description" contenteditable="true">${project.description}</p>
         </section>
-        <section class="cards__bottom card--section">
-          <p class="cards__bottom--text">Quality: ${project.quality}</p>
+        <section class="card-bottom">
+          <p class="card-quality-text">Quality: ${project.quality}</p>
+          <button class="card-delete">DELETE</button>
         </section>
       </div>`;
   projectContainer.insertAdjacentHTML('afterbegin', projectCard)
@@ -42,7 +52,7 @@ function displayProjects(project) {
 
 function reinstantiateStoredProject() {
   let projects = projectCollection.map(project => {
-    return new Project(project.id, project.title, project.body, project.star, project.quality);
+    return new Project(project.id, project.title, project.description, project.star, project.quality);
   });
   projectCollection = projects;
   displayStoredProjects(projectCollection);
@@ -52,4 +62,22 @@ function displayStoredProjects(projectCollection) {
   projectCollection.forEach(project => {
     displayProjects(project);
   });
+}
+
+function enableSaveButton() {
+  if (titleInput.value === "" || descriptionInput.value === "") {
+    saveButton.disabled = true;
+  } else {
+    saveButton.disabled = false;
+  }
+}
+
+function cardActions(e) {
+  if (e.target.className === "card-delete") {
+    let clickedCard = e.target.closest('.card')
+    clickedCard.remove();
+    let index = projectCollection.findIndex(project => project.id === parseInt(clickedCard.dataset.id));
+    let project = projectCollection[index];
+    project.deleteFromStorage(index);
+  }
 }

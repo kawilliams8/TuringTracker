@@ -1,8 +1,8 @@
 class Project {
-  constructor(id, title, body, star, quality) {
+  constructor(id, title, description, star, quality) {
     this.id = id;
     this.title = title || "";
-    this.body = body || "";
+    this.description = description || "";
     this.star = false;
     this.quality = quality || 0;
   }
@@ -13,7 +13,7 @@ class Project {
   }
 
   deleteFromStorage(index) {
-    projectsCollection.splice(index, 1);
+    projectCollection.splice(index, 1);
     this.saveToStorage();
   }
 

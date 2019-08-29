@@ -47,3 +47,16 @@ main {
   background-color: blue;
   height: 60%;
 }
+
+.card {
+  background-color: white;
+  display: inline-block;
+  height: 200px;
+  margin: 20px;
+  width: 150px;
+}
+
+.card-top {
+  background-color: maroon;
+  height: 10px;
+}
