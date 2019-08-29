@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  height: 800px;
+}
+
+.sidebar {
+  background-color: red;
+  height: 100%;
+  width: 20%;
+}
+
+main {
+  height: 100%;
+  width: 80%;
+}
+
+.upper-main {
+  background-color: green;
+  height: 40%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 30%;
+}
+
+.projectTitle-input,
+.projectSubmit-button,
+.projectSearch-input {
+  height: 36px;
+  margin: 10px;
+}
+
+.projectDescription-input {
+  height: 100px;
+  margin: 10px;
+}
+
+.lower-main {
+  background-color: blue;
+  height: 60%;
+}

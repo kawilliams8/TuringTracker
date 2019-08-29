@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <title>Turing Tracker</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <h1>Turing Tracker</h1>
+      <h3>Filter Starred Projects</h3>
+      <button>Show Starred Projects</button>
+      <h3>Filter By Quality</h3>
+      <button>Swill</button>
+      <button>Plausible</button>
+      <button>Genius</button>
+    </aside>
+    <main>
+      <section class="upper-main">
+        <form class="form-container">
+          <label for="title">Title:</label>
+          <input id="title" class="projectTitle-input" type="text" placeholder="Project Title">
+          <label for="description">Description:</label>
+          <textarea id="description" class="projectDescription-input" rows="20" cols="100" placeholder="Project Description"></textarea>
+          <button class="projectSubmit-button" >Save Project</button>
+          <input class="projectSearch-input" type="text" placeholder="Search Projects">
+        </form>
+      </section>
+      <section class="lower-main"></section>
+    </main>
+  </body>
+  <script src="Project.js"></script>
+  <script src="main.js"></script>
+</html>
