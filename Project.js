@@ -8,11 +8,13 @@ class Project {
   }
 
   saveToStorage() {
-
+    let projects = JSON.stringify(projectCollection);
+    localStorage.setItem("projects", projects);
   }
 
-  deleteFromStorage() {
-
+  deleteFromStorage(index) {
+    projectsCollection.splice(index, 1);
+    this.saveToStorage();
   }
 
   updateIdea() {
