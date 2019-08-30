@@ -37,7 +37,8 @@ function clearForm() {
 function displayProjects(project) {
   let projectCard = `
     <div class="card" data-id="${project.id}">
-        <section class="card-top"></section>
+      <section class="card-top"></section>
+      <article class="card-contents>
         <section class="card-middle">
           <h3 class="card-title" contenteditable="true">${project.title}</h3>
           <p class="card-description" contenteditable="true">${project.description}</p>
@@ -45,7 +46,8 @@ function displayProjects(project) {
         <section class="card-bottom">
           <p class="card-quality-text">Quality: ${project.quality}</p>
           <button class="card-delete">DELETE</button>
-        </section>
+        </article>
+        </div>
       </div>`;
   projectContainer.insertAdjacentHTML('afterbegin', projectCard)
 }
